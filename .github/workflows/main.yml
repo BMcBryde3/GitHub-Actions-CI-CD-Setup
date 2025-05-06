@@ -18,12 +18,12 @@ jobs:
     steps:
       # Get code from repo
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
-      - name: Use Node.js 21.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
         with:
-          node-version: 21.x
+          node-version: 20.x
 
       # Install dependencies
       - name: 🧰 Install Deps
@@ -37,12 +37,12 @@ jobs:
       - name: Run Build
         run: npm run build
 
-      # Start sever
+      # Start server
       - name: Start server and wait
         run: |
           npx concurrently -k -s first -n "SERVER,WAIT" \
           "npm run start" \
-          "npx wait-on http://localhost:3000 --timeout 90000"
+          "npx wait-on http://localhost:3001 --timeout 90000"
         env:
           PORT: 3001
 
