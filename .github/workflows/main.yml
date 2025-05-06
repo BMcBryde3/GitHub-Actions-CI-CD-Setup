@@ -42,10 +42,11 @@ jobs:
         run: |
           npx concurrently -k -s first -n "SERVER,WAIT" \
           "npm run develop" \
+          "npm run start" \
           "npx wait-on http://localhost:3000 --timeout 30000"
         env:
           PORT: 3001
 
-      # Run tests
-      - name: Run Tests
+      # Run Component tests
+      - name: Run Component Tests
         run: npm run test-component
