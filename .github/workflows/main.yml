@@ -28,7 +28,7 @@ jobs:
       # Install dependencies
       - name: 🧰 Install Deps
         run: npm install
-        
+
       # Run lint
       - name: Run Lint
         run: npm run lint
@@ -37,6 +37,15 @@ jobs:
       - name: Run Build
         run: npm run build
 
+      # Start sever
+      - name: Start server and wait
+        env:
+          port: 3001
+        run: |
+          npx concurrently -k -s first -n "SERVER,WAIT" \
+            "npm run develop" \
+            "npx wait-on http://localhost:3000 --timeout 30000"
+
       # Run tests
       - name: Run Tests
-        run: npm run test
+        run: npm run test-component
