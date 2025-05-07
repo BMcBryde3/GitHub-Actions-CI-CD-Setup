@@ -46,6 +46,6 @@ jobs:
         env:
           PORT: 3001
 
-      # Run component tests
+      # Run component tests with cypress
       - name: Run Component Tests
         run: npm run test-component
